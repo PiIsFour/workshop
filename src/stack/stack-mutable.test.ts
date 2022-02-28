@@ -1,4 +1,4 @@
-import { Stack } from './stack'
+import { Stack } from './stack-mutable'
 
 describe('empty stack', () => {
 	const emptyStack = () => new Stack<number>()
