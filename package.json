@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watch",
     "test:all": "jest",
-    "lint": "eslint"
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",

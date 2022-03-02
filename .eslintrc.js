@@ -65,6 +65,7 @@ module.exports = {
 		'object-curly-spacing': ['error', 'always', { 'arraysInObjects': false, 'objectsInObjects': false }],
 		'one-var': ['error', 'never'],
 		'prefer-object-spread': 'error',
+		'prefer-destructuring': 'error',
 		'space-infix-ops': 'error',
 		'space-unary-ops': 'error',
 		'switch-colon-spacing': 'error',
