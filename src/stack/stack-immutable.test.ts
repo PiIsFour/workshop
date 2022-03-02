@@ -1,4 +1,4 @@
-import { emptyStack, Stack } from './stack-immutable'
+import { emptyStack } from './stack-immutable'
 
 describe('an empty immutable stack', () => {
 	it('is empty', () => {
@@ -51,19 +51,3 @@ describe('stack with two elements', () => {
 		expect(popped.peek()).toBe(1)
 	})
 })
-
-// it('playground', () => {
-// 	const stack = emptyStack
-// 		.push(1)
-// 		.push(2)
-// 		.pop()
-
-// 	if(!stack.isEmpty()) {
-// 		stack.pop()
-// 	}
-
-// 	let typedStack = emptyStack.push(1).pop()
-// 	if(typedStack.isEmpty()) {
-// 		typedStack = typedStack.push('hello world')
-// 	}
-// })
