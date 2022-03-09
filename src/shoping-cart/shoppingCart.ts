@@ -1,22 +1,38 @@
 import { Article } from './article'
 
 export class ShoppingCart {
-	constructor(private readonly total: number) {
+	constructor(private readonly articles: Article[] = []) {
 	}
 
 	addItem(article: Article): ShoppingCart {
-		const { price } = article
-		const newTotal = this.total + price
-		return new ShoppingCart(newTotal)
+		const newArticles = [...this.articles, article]
+
+		return new ShoppingCart(newArticles)
 	}
 
 	removeItem(article: Article) {
-		return new ShoppingCart(0)
+		const articleIndex = this.articles.findIndex(x => x.name === article.name)
+		if(articleIndex === -1) {
+			return this
+		}
+
+		const remainingArticles = this.articles.filter((_, index) => articleIndex !== index)
+
+		return new ShoppingCart(remainingArticles)
+	}
+
+	private total() {
+		return this.articles
+			.map(x => x.price)
+			.reduce(sum, 0)
 	}
 
 	calculateSummary() {
 		return {
-			total: this.total,
+			total: this.total(),
 		}
 	}
 }
+
+const sum = (a: number, b: number): number => a + b
+
