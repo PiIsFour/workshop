@@ -1,10 +1,10 @@
 export const log = () => {
-	return 42
+	console.log(42)
 }
 
-let a = 7
+const a = 7
 export function readA() {
-	return a++
+	return a
 }
 
 export class Counter {
@@ -15,8 +15,10 @@ export class Counter {
 	}
 
 	read() {
-		const temp = this.count
+		return this.count
+	}
+
+	reset(): void {
 		this.count = 0
-		return temp
 	}
 }

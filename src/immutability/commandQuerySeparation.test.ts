@@ -1,10 +1,10 @@
 import { Counter, log, readA } from './commandQuerySeparation'
 
-xit('does something', () => {
+it('does something', () => {
 	expect(log()).toBe(undefined)
 })
 
-xit('does not matter how often', () => {
+it('does not matter how often', () => {
 	const x = readA()
 	const square = x * x
 
@@ -13,7 +13,7 @@ xit('does not matter how often', () => {
 	expect(square2).toBe(square)
 })
 
-xit('should do what you would expect', () => {
+it('should do what you would expect', () => {
 	const c = new Counter()
 
 	c.tick()
@@ -21,10 +21,11 @@ xit('should do what you would expect', () => {
 	c.tick()
 
 	expect(c.read()).toBe(3)
+	c.reset()
 
-	// c.tick()
-	// c.tick()
-	// c.tick()
+	c.tick()
+	c.tick()
+	c.tick()
 
-	// expect(c.read()).toBe(6)
+	expect(c.read()).toBe(3)
 })
