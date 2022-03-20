@@ -1,9 +1,5 @@
-//#region disable stuff
-/* eslint-disable */
-export const makeItAModule = true
-//#endregion
-
-// statements
+## statements
+```ts
 let a
 a = 5
 a += 1
@@ -12,8 +8,10 @@ if(a) {}
 return a
 throw a
 function test() {}
+```
 
-// expressions
+## expressions
+```ts
 'hello'
 a + 1
 a
@@ -21,21 +19,25 @@ a ? 1 : 2
 () => {}
 5
 { name: 'test' }
+```
 
 
 
 
-// what about those
+## what about those
+```ts
 let c, d, i = 5
 
 b ? a = 1 : c = 2
 a = c = 5
 if(a = b) {}
 a = i++
+```
 
 
+## scope of effects
+```ts
 let sum
-// scope of effects
 (a: number, b: number, c: number, d: number) => {
 	// const cd = c * d
 	// const ab = a * b
@@ -43,5 +45,4 @@ let sum
 	sum = a*b
 	sum += c*d
 }
-
-console.log(5)
+```
