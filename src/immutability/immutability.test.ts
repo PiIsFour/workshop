@@ -40,7 +40,7 @@ const popTimesCallback2 = (stack: IStack<number>, getMultiplier: () => number): 
 	}
 }
 
-xit('we can not cheat ourself', () => {
+it('we can not cheat ourself', () => {
 	const stack = emptyStack
 		.push(5)
 

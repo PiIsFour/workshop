@@ -1,6 +1,6 @@
 import { User, Address } from './user'
 
-xit('can change street for a user', () => {
+it('can change street for a user', () => {
 	const user = new User('Alice', new Address('78 Piccadilly', 'London'))
 
 	user.address.street = '101 Piccadilly'
