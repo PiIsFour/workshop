@@ -73,7 +73,7 @@ module.exports = {
 		'generator-star-spacing': ['error', { 'before': true, 'after': false }],
 		'yield-star-spacing': ['error', 'before'],
 		'no-var': 'error',
-		'prefer-const': 'error',
+		'prefer-const': ['error', { 'destructuring': 'all' }],
 		'rest-spread-spacing': ['error', 'never'],
 		'template-curly-spacing': ['error', 'always'],
 	},
