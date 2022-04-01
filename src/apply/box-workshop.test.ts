@@ -1,5 +1,5 @@
 import { pipe } from '../helpers/pipe'
-import { box } from './box-workshop'
+import { Box, box, ap } from './box-workshop'
 
 describe('a box', () => {
 	const add = (a: number) => (b: number) => a + b
@@ -14,6 +14,22 @@ describe('a box', () => {
 		const a = box(2)
 		const b = box(3)
 
-		// expect(result).toEqual(box(5))
+		const boxFn = a.map(add)
+		const result = b.apBackwards(boxFn)
+
+		expect(result).toEqual(box(5))
+	})
+
+	it('ap', () => {
+		const a = box(2)
+		const b = box(3)
+
+		const result: Box<number> = pipe(
+			box(add),
+			ap(a),
+			ap(b),
+		)
+
+		expect(result).toEqual(box(5))
 	})
 })

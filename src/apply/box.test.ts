@@ -1,5 +1,5 @@
 import { pipe } from '../helpers/pipe'
-import { Box, box, map, ap } from './box'
+import { Box, box, ap } from './box'
 
 describe('a box', () => {
 	const add = (a: number) => (b: number) => a + b
