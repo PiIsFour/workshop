@@ -11,3 +11,17 @@ export function pipe<T>(value: T, ...fns: Fn<any, any>[]): T {
 		value,
 	)
 }
+
+export function flow<A>() {
+	function flow<B>(fn: Fn<A, B>): (value: A) => B
+	function flow<B, C>(fa: Fn<A, B>, fb: Fn<B, C>): (value: A) => C
+	function flow<B, C, D>(fa: Fn<A, B>, fb: Fn<B, C>, fc: Fn<C, D>): (value: A) => D
+	function flow<B, C, D, E>(fa: Fn<A, B>, fb: Fn<B, C>, fc: Fn<C, D>, fd: Fn<D, E>): (value: A) => E
+	function flow(...fns: Fn<any, any>[]) {
+		return (value: any) => fns.reduce(
+			(previousResult, fn) => fn(previousResult),
+			value,
+		)
+	}
+	return flow
+}
