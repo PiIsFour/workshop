@@ -17,42 +17,6 @@ export class GildedRose {
 		this.items = items
 	}
 
-	updateAgedBrie(item: Item) {
-		if(item.quality < 50) {
-			item.quality = item.quality + 1
-		}
-		item.sellIn = item.sellIn - 1
-		if(item.sellIn < 0) {
-			if(item.quality < 50) {
-				item.quality = item.quality + 1
-			}
-		}
-	}
-
-	updateBackstagePasses(item: Item) {
-		if(item.quality < 50) {
-			item.quality = item.quality + 1
-			if(item.sellIn < 11) {
-				if(item.quality < 50) {
-					item.quality = item.quality + 1
-				}
-			}
-			if(item.sellIn < 6) {
-				if(item.quality < 50) {
-					item.quality = item.quality + 1
-				}
-			}
-		}
-		item.sellIn = item.sellIn - 1
-		if(item.sellIn < 0) {
-			item.quality = item.quality - item.quality
-		}
-	}
-
-	updateSulfuras(item: Item) {
-		// TODO: Remove
-	}
-
 	updateNormalItem(item: Item) {
 		if(item.quality > 0) {
 			item.quality = item.quality - 1
@@ -65,17 +29,21 @@ export class GildedRose {
 		}
 	}
 
-	updateItemQuality(item: Item) {
+	getUpdater(item: Item) { // TODO: what return type goes here
 		switch (item.name) {
 			case 'Aged Brie':
-				return this.updateAgedBrie(item)
+				return new AgedBrieUpdater(item)
 			case 'Backstage passes to a TAFKAL80ETC concert':
-				return this.updateBackstagePasses(item)
+				return new BackstagePassUpdater(item)
 			case 'Sulfuras, Hand of Ragnaros':
-				return this.updateSulfuras(item)
+				return new SulfurasUpdater(item)
 			default:
-				return this.updateNormalItem(item)
+				return new NormalItemUpdater(item)
 		}
+	}
+
+	updateItemQuality(item: Item) {
+		return this.getUpdater(item).update()
 	}
 
 	updateQuality() {
@@ -87,3 +55,62 @@ export class GildedRose {
 	}
 }
 
+class AgedBrieUpdater {
+	constructor(private item: Item) {}
+	update() {
+		if(this.item.quality < 50) {
+			this.item.quality = this.item.quality + 1
+		}
+		this.item.sellIn = this.item.sellIn - 1
+		if(this.item.sellIn < 0) {
+			if(this.item.quality < 50) {
+				this.item.quality = this.item.quality + 1
+			}
+		}
+	}
+}
+
+class BackstagePassUpdater {
+	constructor(private item: Item) {}
+	update() {
+		if(this.item.quality < 50) {
+			this.item.quality = this.item.quality + 1
+			if(this.item.sellIn < 11) {
+				if(this.item.quality < 50) {
+					this.item.quality = this.item.quality + 1
+				}
+			}
+			if(this.item.sellIn < 6) {
+				if(this.item.quality < 50) {
+					this.item.quality = this.item.quality + 1
+				}
+			}
+		}
+		this.item.sellIn = this.item.sellIn - 1
+		if(this.item.sellIn < 0) {
+			this.item.quality = this.item.quality - this.item.quality
+		}
+	}
+}
+
+class SulfurasUpdater {
+	constructor(item: Item) {}
+	update() {
+		// TODO: Remove
+	}
+}
+
+class NormalItemUpdater {
+	constructor(private item: Item) {}
+	update() {
+		if(this.item.quality > 0) {
+			this.item.quality = this.item.quality - 1
+		}
+		this.item.sellIn = this.item.sellIn - 1
+		if(this.item.sellIn < 0) {
+			if(this.item.quality > 0) {
+				this.item.quality = this.item.quality - 1
+			}
+		}
+	}
+}
