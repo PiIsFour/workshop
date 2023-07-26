@@ -10,6 +10,10 @@ export class Item {
 	}
 }
 
+interface Updater {
+	update: () => void
+}
+
 export class GildedRose {
 	items: Array<Item>
 
@@ -17,19 +21,7 @@ export class GildedRose {
 		this.items = items
 	}
 
-	updateNormalItem(item: Item) {
-		if(item.quality > 0) {
-			item.quality = item.quality - 1
-		}
-		item.sellIn = item.sellIn - 1
-		if(item.sellIn < 0) {
-			if(item.quality > 0) {
-				item.quality = item.quality - 1
-			}
-		}
-	}
-
-	getUpdater(item: Item) { // TODO: what return type goes here
+	getUpdater(item: Item): Updater {
 		switch (item.name) {
 			case 'Aged Brie':
 				return new AgedBrieUpdater(item)
@@ -55,7 +47,7 @@ export class GildedRose {
 	}
 }
 
-class AgedBrieUpdater {
+class AgedBrieUpdater implements Updater { // TODO: maybe explore what a base class adds here
 	constructor(private item: Item) {}
 	update() {
 		if(this.item.quality < 50) {
